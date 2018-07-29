@@ -233,11 +233,11 @@ document_end = '\n\\end{document}'
 TABLE_FIT_SCALE = 0.85        
         
 class LaTeXCode(HTMLParserVisitor):
-    def __init__(self, table_data, tag_dict, args):#table_sw, anchor, img):
+    def __init__(self, table_data, tag_dict, args):
         super().__init__()
         self.title = ''
         self.table_data = table_data
-        if args.t == 'TTABLE':
+        if args.t == 'TABLE':
             self.table_sw = True
         else:
             self.table_sw = False
