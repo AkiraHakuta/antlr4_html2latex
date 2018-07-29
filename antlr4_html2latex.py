@@ -816,7 +816,7 @@ def main(filename, args, file_list):
     get_data = GetTableData(get_table_size.data, tag_dict)
     get_data.visit(tree)
     #print(get_data.data)
-    latexc = LaTeXCode(get_data.data, tag_dict, args)#table_sw, anchor, img)
+    latexc = LaTeXCode(get_data.data, tag_dict, args)
     result=latexc.visit(tree)
     result1 = ''
     result_len = len(result)
