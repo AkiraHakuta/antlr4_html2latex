@@ -1,0 +1,38 @@
+ paired tag --> latex 
+[pair_tag], [p], [], [\\par\n]
+[pair_tag], [li], [\\item ] , [\n]
+[pair_tag], [ol], [\n\\begin{enumerate}\n] , [\n\\end{enumerate}]
+[pair_tag], [ul], [\n\\begin{itemize}\n],[\n\\end{itemize}]
+[pair_tag], [dt], [],[\\par\n]
+[pair_tag], [dd], [~~~],[\\par\n]
+[pair_tag], [h4], [\\section*{\\normalsize ], [}\n]
+[pair_tag], [h1], [\\section*{\\Huge ], [}\n]
+[pair_tag], [h2], [\\section*{\\Large ], [}\n]
+[pair_tag], [h3], [\\section*{\\large ], [}\n]
+[pair_tag], [h4], [\\section*{\\normalsize ], [}\n]
+[pair_tag], [h5], [\\section*{\\small ], [}\n]
+[pair_tag], [h6], [\\section*{\\footnotesize ], [}\n]
+[pair_tag], [strong], [{\\bf ], [}]
+[pair_tag], [select], [\\newline\nbegin select:\\newline\n], [\n\n\\newline\nend select \\newline\n]
+
+
+entity code --> latex
+[sp_text], [&alpha;], [$\\alpha$]
+[sp_text], [&beta;], [$\\beta$]
+[sp_text], [&gamma;], [$\\gamma$]
+[sp_text], [&dagger;], [$\\dagger$]
+[sp_text], [&amp;] , [\\$]
+[sp_text], [&nbsp;], [~]
+[sp_text], [&uarr;], [$\\uparrow$]
+[sp_text], [&darr;], [$\\downarrow$]
+[sp_text], [&rarr;], [$\\rightarrow$]
+[sp_text], [&larr;], [$\\leftarrow$]
+[sp_text], [&lt;], [\\verb|<|]
+[sp_text], [&gt;], [\\verb|>|]
+
+[sp_text], [&#176;], [$^\\circ$]
+[sp_text], [&#8211;], [--]
+[sp_text], [&#047;], [/]
+
+[sp_text], [&], [\\verb|&|]
+[sp_text], [$], [\\verb|$|]
