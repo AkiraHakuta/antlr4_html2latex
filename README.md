@@ -1,9 +1,11 @@
+# antlr4_html2latex  
+Converter html into latex by using antlr4.  
+Author:Akira Hakuta,  Date: 2018/07/28   
 
-
-ANTLR : <http://www.antlr.org>  (antlr4-python3-runtime 4.7)  
-
-cx_Freeze: <https://anthony-tuininga.github.io/cx_Freeze/>  
-
+## Installation (windows)  
+Python3: <https://www.python.org/downloads/windows/>   
+ANTLR : <http://www.antlr.org>  (antlr4-python3-runtime 4.7)   
+cx_Freeze: <https://anthony-tuininga.github.io/cx_Freeze/>    
 ```
 python3 (python-3.6.2.exe)
 pip install antlr4-python3-runtime 
