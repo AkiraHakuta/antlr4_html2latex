@@ -132,47 +132,27 @@ If you want to antlr4_tex2sym.py to .exe files,
 
 #### antlr4_html2latex は HTMLのコードを解析して、  LaTeXのコードに変換する Python のツールです。  
 同様のツールは、既にあるのですが、  
-
 The Definitive ANTLR 4 Reference (by Terence Parr)    12.4 Parsing and Lexing  XML  
-
 を参考に、いちからプログラムを書いてみました。  
-
-完成したプログラムを実行してみると、error となることがあります。  
-
+完成したプログラムを実行してみると、error となることがあります。 
 原因と思われるのは、  
-
-1. タグが省略 されている。特に終了タグ。 ( optional tags : li, dd, tr, p, .... )
-
+1. タグが省略 されている。特に終了タグ。 ( optional tags : li, dd, tr, p, .... ) 
 2. 終了タグが多い 。  
-
 3. 終了タグが少ない。例えば、`</div>`  
-
-対応策
-
+対応策  
 1. コードを読んで、適当な場所に closing tag を挿入   ( html, body, head を除く )    
 2. 分かった時点で、closing tag を単純に削除 
 3. error message を表示するのみ   
-
 ```
 > python.exe antlr4_html2latex.py sample2.html -m MOD
 ```
-
-で確認してください。
-
-pdflatex.exe で pdf を作れないこともあります。  
-
+で確認してください。  
+pdflatex.exe で pdf を作れないこともあります。 
 その時は、  
-
 option  ` -a NOANCHOR -i NOIMG　`を付けて実行。
-
-`\href, \includegraphics` なしで、LaTeX のコードを生成します。
-
-不備なところが多々あります。
-
+`\href, \includegraphics` なしで、LaTeX のコードを生成します。  
+不備なところが多々あります。  
 このツールはまだ試作段階です。
 
-
-
-####  実行ファイル 、ソースコード について 
-
-releases の各 zip fileをクリックして解凍。
+####  実行ファイル 、ソースコード について   
+releases の各 zip fileをクリックして解凍。  
