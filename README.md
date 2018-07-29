@@ -139,6 +139,7 @@ The Definitive ANTLR 4 Reference (by Terence Parr)    12.4 Parsing and Lexing  X
 1. タグが省略 されている。特に終了タグ。 ( optional tags : li, dd, tr, p, .... ) 
 2. 終了タグが多い 。  
 3. 終了タグが少ない。例えば、`</div>`  
+
 対応策  
 1. コードを読んで、適当な場所に closing tag を挿入   ( html, body, head を除く )    
 2. 分かった時点で、closing tag を単純に削除 
