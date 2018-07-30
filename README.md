@@ -1,5 +1,5 @@
 # antlr4_html2latex  
-Html to LaTeX converter using antlr4.  
+HTML to LaTeX converter using antlr4.  
 Author: Akira Hakuta,  Date: 2018/07/29     
 
 ## Installation (windows)  
