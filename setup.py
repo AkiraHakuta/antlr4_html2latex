@@ -17,5 +17,5 @@ cx_Freeze.setup(
     options = {"build_exe": 
         {"build_exe":"antlr4_html2latex_binary/","includes":includes, "include_files": include_files, "excludes": excludes,"packages": packages}},
     version = "0.5",
-    description = "Converter html into latex by using antlr4",
+    description = "Html to LaTeX Converter using antlr4",
     executables = executables)
