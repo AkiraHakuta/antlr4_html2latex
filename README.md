@@ -146,7 +146,7 @@ The Definitive ANTLR 4 Reference (by Terence Parr)    12.4 Parsing and Lexing  X
 > python.exe antlr4_html2latex.py sample2.html -m MOD
 ```
 で確認してください。  
-pdflatex.exe で pdf を作れないこともあります。  
+pdflatex.exe で pdf が作れないこともあります。  
 その時は、  
 option  ` -a NOA -i NOIMG　`を付けて実行。  
 `\href, \includegraphics` なしで、LaTeX のコードを生成します。  
