@@ -23,7 +23,6 @@ antlr4_html2latex creates 'sample1.tex'.
 ```
 ```
 > python.exe antlr4_html2latex.py sample2.html -m MOD
-line 89:7 mismatched input '<EOF>' expecting '<'
 
 This is antlr4_html2latex version 0.5.
 
@@ -31,7 +30,7 @@ modifying html file (insert 'optional tags' except p tag) ....
 
 paired tag error. delete: line=67,column=1,</div>
 
-paired tag error {'name':[opening tags number, closing tags number],...} ignore!
+paired tag error {'name':[opening tags num, closing tags num],...}
  {'span': [2, 1]}
 
 insert tag:
@@ -57,6 +56,8 @@ insert p tag:
 line = about 15,column = about 2,</p>
 line = about 17,column = about 1,</p>
 
+delete paired tag:  ['span']
+
 antlr4_html2latex creates 'sample2.tex'.
 ```
 
@@ -64,8 +65,8 @@ antlr4_html2latex creates 'sample2.tex'.
 
 ```
 > python.exe antlr4_html2latex.py -h
-usage: antlr4_html2latex.py [-h] [-v] [-t NOTABLE] [-e ENCODE] [-m MOD]
-                            [-a NOANCHOR] [-i NOIMG]
+usage: antlr4_html2latex.py [-h] [-v] [-t NOTBL] [-e ENCODING] [-m MOD]
+                            [-a NOA] [-i NOIMG]
                             filename
 
 positional arguments:
@@ -74,10 +75,10 @@ positional arguments:
 optional arguments:
   -h, --help   show this help message and exit
   -v           show program's version number and exit
-  -t NOTABLE   converting table to tabular ,default = TABLE
-  -e ENCODE    -e ascii or -e euc-jp or ... ,default = utf-8
+  -t NOTBL     converting table to tabular ,default = TBL
+  -e ENCODING  -e ascii or -e euc-jp or ... ,default = utf-8
   -m MOD       modifying html codes (optional tags, ..), default = NOMOD
-  -a NOANCHOR  converting anchor to href, default = ANCHOR
+  -a NOA       converting anchor to href, default = A
   -i NOIMG     converting img to includegraphics, default = IMG
 ```
 #### html2latex.csv  
@@ -122,11 +123,7 @@ If you want to antlr4_tex2sym.py to .exe files,
 > antlr4_tex2sym.exe sample2.html -m MOD
 ```
 
-
-
 ------
-
-
 
 ### in japanese
 
@@ -144,17 +141,15 @@ The Definitive ANTLR 4 Reference (by Terence Parr)    12.4 Parsing and Lexing  X
 対応策  
 1. コードを読んで、適当な場所に closing tag を挿入   ( html, body, head を除く )    
 2. 分かった時点で、closing tag を単純に削除 
-3. error message を表示するのみ   
+3. error message を表示し、該当する paired tag をすべて削除     
 ```
 > python.exe antlr4_html2latex.py sample2.html -m MOD
 ```
 で確認してください。  
 pdflatex.exe で pdf を作れないこともあります。  
 その時は、  
-option  ` -a NOANCHOR -i NOIMG　`を付けて実行。  
+option  ` -a NOA -i NOIMG　`を付けて実行。  
 `\href, \includegraphics` なしで、LaTeX のコードを生成します。  
-不備なところが多々あります。  
-このツールはまだ試作段階です。  
 
 ####  実行ファイル 、ソースコード について   
 releases の各 zip fileをクリックして解凍。  
