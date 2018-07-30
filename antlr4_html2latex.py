@@ -1,3 +1,6 @@
+# python.exe antlr4_html2latex.py sample1.html
+# python.exe antlr4_html2latex.py sample2.html -m MOD
+
 from antlr4 import *
 
 from gen.HTMLLexer import HTMLLexer
@@ -237,11 +240,11 @@ class LaTeXCode(HTMLParserVisitor):
         super().__init__()
         self.title = ''
         self.table_data = table_data
-        if args.t == 'TABLE':
+        if args.t == 'TBL':
             self.table_sw = True
         else:
             self.table_sw = False
-        self.anchor = args.a
+        self.a = args.a
         self.img = args.i    
         self.pair_tag_dict = tag_dict['pair_tag_dict']
         self.sp_text_dict = tag_dict['sp_text_dict']
@@ -295,7 +298,7 @@ class LaTeXCode(HTMLParserVisitor):
                     i += 1
                 else:
                     break
-            if self.anchor == 'ANCHOR':
+            if self.a == 'A':
                 result = '\\href{' + href[1:-1:].replace('%','\%') + '}{' + self.visit(ctx.content()) +'}\n'
             else:
                 result = 'anchor: ' + self.visit(ctx.content()) + '\n'
@@ -703,8 +706,29 @@ class GetModPData(MOD_HTMLParserListener):
         if self.p_cl_tag == NO_CL_TAG:
             self.insert_before[ctx] = '</p>\n'
             self.p_cl_tag = None
+
+
+            
+class GetModDeleteData(MOD_HTMLParserListener):
+    def __init__(self,delete_paired_tag_list):
+        super().__init__()
+        self.delete_list =[]
+        self.delete_paired_tag_list = delete_paired_tag_list
+        
+    def enterOpening_tag(self, ctx):        
+        tag_name = ctx.Name(0).getText()
+        for p_tag_name in self.delete_paired_tag_list:
+            if tag_name == p_tag_name:
+                self.delete_list.append(ctx)
             
             
+    
+    def enterClosing_tag(self, ctx):
+        tag_name = ctx.Name().getText()        
+        for p_tag_name in self.delete_paired_tag_list:
+            if tag_name == p_tag_name:
+                self.delete_list.append(ctx)
+                 
             
 def paired_tag_error(paired_tag_dict):
     result = {}
@@ -732,7 +756,7 @@ def mod_main(input_stream):
     walker.walk(mod_data, tree)
     paired_tag_error_dict = paired_tag_error(mod_data.pair_tag_name)
     if paired_tag_error_dict != {}:
-        print('\npaired tag error {\'name\':[opening tags number, closing tags number],...} ignore!\n',paired_tag_error_dict)
+        print('\npaired tag error {\'name\':[opening tags num, closing tags num],...}\n',paired_tag_error_dict)
     rewriter = MyTokenStreamRewriter(token_stream)
     for ctx in mod_data.delete_list:
         rewriter.delete(DEFAULT_PROGRAM_NAME,ctx.start.tokenIndex, ctx.stop.tokenIndex) 
@@ -748,21 +772,15 @@ def mod_main(input_stream):
         rewriter.insertBeforeIndex(key.start.tokenIndex, value) 
     interval = Interval(rewriter.tokens.tokens)
     result =rewriter.getText(DEFAULT_PROGRAM_NAME,interval).replace('\r\n','\n')
-    return result 
+    return [result,list(paired_tag_error_dict.keys())]  
+ 
     
             
 def mod_p_main(input_stream):
     lexer = MOD_HTMLLexer(input_stream)
     token_stream = CommonTokenStream(lexer)
-    #token_stream.fill()
-    #print('tokens:')
-    #for tk in token_stream.tokens:
-    #    print(tk)
     parser = MOD_HTMLParser(token_stream)
     tree = parser.document()
-    #lisp_tree_str = tree.toStringTree(recog=parser)
-    #print(beautify_lisp_string(lisp_tree_str))
-    
     walker = ParseTreeWalker()
     mod_p_data = GetModPData()
     walker.walk(mod_p_data, tree)    
@@ -774,12 +792,29 @@ def mod_p_main(input_stream):
         for key, value in mod_p_data.insert_before.items():
             print('line = about {:d},column = about {:d},{:s}'.format(key.start.line,key.start.column+1,value.replace('\n','')))
     for key, value in mod_p_data.insert_before.items():
-        #print('value=',value)
         rewriter.insertBeforeIndex(key.start.tokenIndex, value) 
     interval = Interval(rewriter.tokens.tokens)
     result =rewriter.getText(DEFAULT_PROGRAM_NAME,interval).replace('\r\n','\n')
     return result   
 
+
+
+def mod_delete_main(input_stream, delete_paired_tag_list):
+    lexer = MOD_HTMLLexer(input_stream)
+    token_stream = CommonTokenStream(lexer)
+    parser = MOD_HTMLParser(token_stream)
+    tree = parser.document()
+    walker = ParseTreeWalker()
+    mod_delete_data = GetModDeleteData(delete_paired_tag_list)
+    walker.walk(mod_delete_data, tree)    
+    rewriter = MyTokenStreamRewriter(token_stream)     
+    for ctx in mod_delete_data.delete_list:
+        rewriter.delete(DEFAULT_PROGRAM_NAME,ctx.start.tokenIndex, ctx.stop.tokenIndex) 
+    interval = Interval(rewriter.tokens.tokens)
+    result =rewriter.getText(DEFAULT_PROGRAM_NAME,interval).replace('\r\n','\n')
+    return result   
+    
+    
     
 def main(filename, args, file_list):  
     path = file_list[0]
@@ -794,12 +829,20 @@ def main(filename, args, file_list):
         print('\nmodifying html file (insert \'optional tags\' except p tag) ....') 
         result = mod_main(input_stream) 
                
-        #print('mod_main:\n', result)
-        input_stream = InputStream(result.replace('\r\n','\n'))
+        #print('mod_main:\n', result[0])
+        input_stream = InputStream(result[0].replace('\r\n','\n'))
+        delete_paired_tag_list = result[1]
+        
         print('\nmodifying html file (insert  p tag) ....') 
         result = mod_p_main(input_stream)        
         #print('mod_p_main:\n', result)
         input_stream = InputStream(result.replace('\r\n','\n'))
+        if delete_paired_tag_list != []:
+            print('\ndelete paired tag: ', delete_paired_tag_list)
+        result = mod_delete_main(input_stream, delete_paired_tag_list)        
+        #print('mod_delete_main:\n', result)
+        input_stream = InputStream(result.replace('\r\n','\n'))
+        
     lexer = HTMLLexer(input_stream)
     token_stream = CommonTokenStream(lexer)
     token_stream.fill()
@@ -839,10 +882,10 @@ if __name__ == '__main__':
     aparser = argparse.ArgumentParser()
     aparser.add_argument("filename", help="set filename, for example test.html")    
     aparser.add_argument('-v', version='%(prog)s version {}'.format(version), action='version')
-    aparser.add_argument('-t', metavar='NOTABLE',help="converting table  to tabular ,default = TABLE", default = 'TABLE')
-    aparser.add_argument('-e', metavar='ENCODE',help="-e ascii or -e euc-jp or ... ,default = utf-8 ", default = 'utf-8')
+    aparser.add_argument('-t', metavar='NOTBL',help="converting table  to tabular ,default = TBL", default = 'TBL')
+    aparser.add_argument('-e', metavar='ENCODING',help="-e ascii or -e euc-jp or ... ,default = utf-8 ", default = 'utf-8')
     aparser.add_argument('-m',metavar='MOD', help="modifying html codes (optional tags, ..), default = NOMOD ", default = 'NOMOD')
-    aparser.add_argument('-a',metavar='NOANCHOR', help="converting anchor to href, default = ANCHOR ", default = 'ANCHOR')
+    aparser.add_argument('-a',metavar='NOA', help="converting anchor to href, default = A ", default = 'A')
     aparser.add_argument('-i',metavar='NOIMG', help="converting img to includegraphics, default = IMG ", default = 'IMG')
     
     args = aparser.parse_args()
@@ -853,3 +896,4 @@ if __name__ == '__main__':
         print('extension error')
         sys.exit()    
     main(filename, args, [path, sf_ext])
+    
