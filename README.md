@@ -28,35 +28,35 @@ This is antlr4_html2latex version 0.5.
 
 modifying html file (insert 'optional tags' except p tag) ....
 
-paired tag error. delete: line=67,column=1,</div>
+paired tag error. delete: line = 67, column = 1, </div>
 
-paired tag error {'name':[opening tags num, closing tags num],...}
+paired tag error {'name':[number of opening tags, number of closing tags],...}
  {'span': [2, 1]}
 
-insert tag:
-line = 22,column = 6, </li>
-line = 23,column = 3, </li>
-line = 24,column = 6, </li>
-line = 27,column = 6, </li>
-line = 28,column = 3, </li>
-line = 29,column = 5, </li>
-line = 38,column = 3, </td></tr>
-line = 40,column = 4, </th>
-line = 45,column = 6, </td>
-line = 46,column = 4, </td></tr>
-line = 47,column = 9, </td>
-line = 55,column = 3, </dd>
-line = 56,column = 3, </dt>
-line = 64,column = 30, </rt>
-line = 65,column = 5, </rp>
+insert tags:
+line = 22, column = 6, </li>
+line = 23, column = 3, </li>
+line = 24, column = 6, </li>
+line = 27, column = 6, </li>
+line = 28, column = 3, </li>
+line = 29, column = 5, </li>
+line = 38, column = 3, </td></tr>
+line = 40, column = 4, </th>
+line = 45, column = 6, </td>
+line = 46, column = 4, </td></tr>
+line = 47, column = 9, </td>
+line = 55, column = 3, </dd>
+line = 56, column = 3, </dt>
+line = 64, column = 30, </rt>
+line = 65, column = 5, </rp>
 
 modifying html file (insert  p tag) ....
 
 insert p tag:
-line = about 15,column = about 2,</p>
-line = about 17,column = about 1,</p>
+line = 15, column = 2, </p>
+line = 17, column = 1, </p>
 
-delete paired tag:  ['span']
+delete paired tags:  ['span']
 
 antlr4_html2latex creates 'sample2.tex'.
 ```
