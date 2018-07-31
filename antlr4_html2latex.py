@@ -544,7 +544,7 @@ class GetModData(MOD_HTMLParserListener):
         tag_name = ctx.Name().getText()
         if self.set_tag_data(1, tag_name) == -1:
             self.delete_list.append(ctx)
-            print('\npaired tag error. delete: line={:d},column={:d},</{:s}>'.format(ctx.start.line,ctx.start.column+1,tag_name))
+            print('\npaired tag error. delete: line = {:d}, column = {:d}, </{:s}>'.format(ctx.start.line,ctx.start.column+1,tag_name))
             self.pair_tag_name[tag_name][1] += -1             
             return
         if tag_name == 'ol':
@@ -568,7 +568,7 @@ class GetModData(MOD_HTMLParserListener):
         try:
             self.opt = self.opt_stack.pop()
         except:
-            print('tag error! line={:d},column={:d},</{:s}>'.format(ctx.start.line,ctx.start.column+1,tag_name))
+            print('tag error! line = {:d}, column = {:d}, </{:s}>'.format(ctx.start.line,ctx.start.column+1,tag_name))
             pass     
         
             
@@ -756,17 +756,17 @@ def mod_main(input_stream):
     walker.walk(mod_data, tree)
     paired_tag_error_dict = paired_tag_error(mod_data.pair_tag_name)
     if paired_tag_error_dict != {}:
-        print('\npaired tag error {\'name\':[opening tags num, closing tags num],...}\n',paired_tag_error_dict)
+        print('\npaired tag error {\'name\':[number of opening tags, number of closing tags],...}\n',paired_tag_error_dict)
     rewriter = MyTokenStreamRewriter(token_stream)
     for ctx in mod_data.delete_list:
         rewriter.delete(DEFAULT_PROGRAM_NAME,ctx.start.tokenIndex, ctx.stop.tokenIndex) 
     
     if mod_data.insert_before == {}:
-        print('\ninsert tag: None')
+        print('\ninsert tags: None')
     else:
-        print('\ninsert tag:')
+        print('\ninsert tags:')
         for key, value in mod_data.insert_before.items():
-            print('line = {:d},column = {:d}, {:s}'.format(key.start.line,key.start.column+1,value.replace('\n','')))
+            print('line = {:d}, column = {:d}, {:s}'.format(key.start.line,key.start.column+1,value.replace('\n','')))
     for key, value in mod_data.insert_before.items():
         #print('value=',value)
         rewriter.insertBeforeIndex(key.start.tokenIndex, value) 
@@ -790,7 +790,7 @@ def mod_p_main(input_stream):
     else:
         print('\ninsert p tag:')
         for key, value in mod_p_data.insert_before.items():
-            print('line = about {:d},column = about {:d},{:s}'.format(key.start.line,key.start.column+1,value.replace('\n','')))
+            print('line = {:d}, column = {:d}, {:s}'.format(key.start.line,key.start.column+1,value.replace('\n','')))
     for key, value in mod_p_data.insert_before.items():
         rewriter.insertBeforeIndex(key.start.tokenIndex, value) 
     interval = Interval(rewriter.tokens.tokens)
@@ -838,7 +838,7 @@ def main(filename, args, file_list):
         #print('mod_p_main:\n', result)
         input_stream = InputStream(result.replace('\r\n','\n'))
         if delete_paired_tag_list != []:
-            print('\ndelete paired tag: ', delete_paired_tag_list)
+            print('\ndelete paired tags: ', delete_paired_tag_list)
         result = mod_delete_main(input_stream, delete_paired_tag_list)        
         #print('mod_delete_main:\n', result)
         input_stream = InputStream(result.replace('\r\n','\n'))
