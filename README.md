@@ -65,8 +65,8 @@ antlr4_html2latex creates 'sample2.tex'.
 
 ```
 > python.exe antlr4_html2latex.py -h
-usage: antlr4_html2latex.py [-h] [-v] [-e ENCODING] [-t NOTBL] [-m MOD]
-                            [-a NOA] [-i NOIMG]
+usage: antlr4_html2latex.py [-h] [-v] [-e ENCODING] [-m MOD] [-a NOA]
+                            [-i NOIMG] [-t NOTBL]
                             filename
 
 positional arguments:
@@ -76,10 +76,10 @@ optional arguments:
   -h, --help   show this help message and exit
   -v           show program's version number and exit
   -e ENCODING  -e ascii or -e euc-jp or ... ,default = utf-8
-  -t NOTBL     converting table to tabular ,default = TBL
   -m MOD       modifying html codes (optional tags, ..), default = NOMOD
   -a NOA       converting anchor to href, default = A
   -i NOIMG     converting img to includegraphics, default = IMG
+  -t NOTBL     converting table to tabular ,default = TBL
 ```
 #### html2latex.csv  
 
