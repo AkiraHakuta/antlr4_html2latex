@@ -329,10 +329,10 @@ class LaTeXCode(HTMLParserVisitor):
             self.cell_width_scale = round(self.cell_width_scale/self.col_size,3)
             for i in range(self.col_size):
                 tabular_col_head += '|p{'+str(self.cell_width_scale)+'\\textwidth}'
-            tabular_col_head += '|}\\hline\n' 
+            tabular_col_head += '|}\\hline \n' 
             tabular_code = '%table code\n'
             if 'caption' in self.curr_table_data:
-                tabular_code += self.curr_table_data['caption'] + '\\newline\n'              
+                tabular_code += self.curr_table_data['caption'] + '\\newline \n'              
             tabular_code += '\\begin{tabular}' + tabular_col_head \
                 + self.visit(ctx.content())\
                 + '\\end{tabular}\n'                
@@ -374,7 +374,7 @@ class LaTeXCode(HTMLParserVisitor):
                     self.col += 1
                 else:
                     break
-            tabular_code += self.visit(ctx.content()) + '\\\\\\hline'
+            tabular_code += self.visit(ctx.content()) + '\\\\\\hline '
             self.col = 0
             self.row += 1
             return tabular_code 
