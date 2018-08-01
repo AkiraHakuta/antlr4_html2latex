@@ -76,7 +76,7 @@ optional arguments:
   -h, --help   show this help message and exit
   -v           show program's version number and exit
   -e ENCODING  -e ascii or -e euc-jp or ... ,default = utf-8
-  -m MOD       modifying html codes (optional tags, ..), default = NOMOD
+  -m MOD       modifying html file (optional tags, ..), default = NOMOD
   -a NOA       converting anchor to href, default = A
   -i NOIMG     converting img to includegraphics, default = IMG
   -t NOTBL     converting table to tabular ,default = TBL
