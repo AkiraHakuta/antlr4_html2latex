@@ -131,7 +131,10 @@ If you want to antlr4_tex2sym.py to .exe files,
 同様のツールは、既にあるのですが、  
 The Definitive ANTLR 4 Reference (by Terence Parr)    12.4 Parsing and Lexing  XML  
 を参考に、いちからプログラムを書いてみました。  
-完成したプログラムを実行してみると、error となることがあります。  
+完成したプログラムを実行してみると、  
+`line 3610:218 mismatched input '<EOF>' expecting '<'`  
+となることがあります。  
+
 原因と思われるのは、  
 
 1. タグが省略 されている。特に終了タグ。 ( optional tags : li, dd, tr, p, .... ) 
