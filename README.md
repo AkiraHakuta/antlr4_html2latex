@@ -157,5 +157,7 @@ LaTeX の tabular はページを超えて表示することはできません�
 `-t NOTBL` とすると、  
 'tabular' 形式ではなく、paired tag 'table' 内の TEXT のみ出力します。  
 
+※ ver 0.5 は試作段階のものです。時間があれば、今後修正していきます。  
+
 ####  実行ファイル 、ソースコード について   
 releases の各 zip fileをクリックして解凍。  
