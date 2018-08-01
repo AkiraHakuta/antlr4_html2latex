@@ -91,8 +91,8 @@ paired tag --> latex
 [pair_tag], [li], [\\item ] , [\n]
 [pair_tag], [ol], [\n\\begin{enumerate}\n] , [\n\\end{enumerate}]
 [pair_tag], [ul], [\n\\begin{itemize}\n],[\n\\end{itemize}]
-[pair_tag], [dt], [],[\\par\n]
-[pair_tag], [dd], [~~~],[\\par\n]
+[pair_tag], [dt], [],[\\newline\n]
+[pair_tag], [dd], [~~~],[\\newline\n]
 ......
 
 entity code --> latex
