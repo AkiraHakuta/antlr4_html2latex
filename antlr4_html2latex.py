@@ -892,9 +892,9 @@ version = '0.5'
 if __name__ == '__main__':
     aparser = argparse.ArgumentParser()
     aparser.add_argument("filename", help="set filename, for example test.html")    
-    aparser.add_argument('-v', version='%(prog)s version {}'.format(version), action='version')
-    aparser.add_argument('-t', metavar='NOTBL',help="converting table  to tabular ,default = TBL", default = 'TBL')
+    aparser.add_argument('-v', version='%(prog)s version {}'.format(version), action='version')    
     aparser.add_argument('-e', metavar='ENCODING',help="-e ascii or -e euc-jp or ... ,default = utf-8 ", default = 'utf-8')
+    aparser.add_argument('-t', metavar='NOTBL',help="converting table  to tabular ,default = TBL", default = 'TBL')
     aparser.add_argument('-m',metavar='MOD', help="modifying html codes (optional tags, ..), default = NOMOD ", default = 'NOMOD')
     aparser.add_argument('-a',metavar='NOA', help="converting anchor to href, default = A ", default = 'A')
     aparser.add_argument('-i',metavar='NOIMG', help="converting img to includegraphics, default = IMG ", default = 'IMG')
