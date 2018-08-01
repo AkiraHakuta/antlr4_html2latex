@@ -133,7 +133,7 @@ The Definitive ANTLR 4 Reference (by Terence Parr)    12.4 Parsing and Lexing  X
 を参考に、いちからプログラムを書いてみました。  
 完成したプログラムを実行してみると、  
 `line 3610:218 mismatched input '<EOF>' expecting '<'`  
-となることがあります。  
+と表示されることがあります。  
 
 原因と思われるのは、  
 
