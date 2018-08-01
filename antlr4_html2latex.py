@@ -426,7 +426,7 @@ class LaTeXCode(HTMLParserVisitor):
             if self.img == 'IMG':
                 result = '%img alt: ' + alt[1:-1:] + '\n\\includegraphics{'+ src[1:-1:].replace('%','\%').replace('&','\&') + '}\n'
             else:
-                result = '%img alt: ' + alt[1:-1:] + '\n'
+                result = 'img alt: ' + alt[1:-1:] + '\n'
             return result
         elif tag_name == 'br':
             return '\\newline\n'
