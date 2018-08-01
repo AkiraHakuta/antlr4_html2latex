@@ -154,7 +154,7 @@ pdflatex.exe で pdf が作れないこともあります。
 option  ` -a NOA -i NOIMG　`を付けて実行。  
 `\href, \includegraphics` なしで、LaTeX のコードを生成します。  
 LaTeX の tabular はページを超えて表示することはできません。  
-option `-t NOTBL` とすると、　　
+`-t NOTBL` とすると、  
 'tabular' 形式ではなく、paired tag 'table' 内の TEXT のみ出力します。  
 
 ####  実行ファイル 、ソースコード について   
