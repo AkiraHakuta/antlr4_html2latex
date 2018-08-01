@@ -43,7 +43,8 @@ def beautify_lisp_string(in_string):
  
  
 # convert HTML into LaTeX
-
+    
+    
 class GetTableSize(HTMLParserVisitor):
     def __init__(self):
         super().__init__()
@@ -96,8 +97,8 @@ class GetTableSize(HTMLParserVisitor):
                 attr=ctx.attribute(i)
                 if attr != None:
                     if attr.Name(0).getText() == 'colspan':
-                        colspan=attr.ATTVALUE_VALUE().getText()
-                        colspan_num = int(colspan[1:-1:])
+                        colspan=attr.ATTVALUE_VALUE().getText()                        
+                        colspan_num = getInt(colspan)
                     i += 1
                 else:
                     break
@@ -177,11 +178,11 @@ class GetTableData(HTMLParserVisitor):
                 if attr != None:
                     if attr.Name(0).getText() == 'colspan':
                         colspan=attr.ATTVALUE_VALUE().getText()
-                        colspan_num = int(colspan[1:-1:])
+                        colspan_num = getInt(colspan)
                         self.data1['colspan'][self.row][self.col] = colspan_num
                     elif attr.Name(0).getText() == 'rowspan':
                         rowspan=attr.ATTVALUE_VALUE().getText()
-                        self.rowspan_num = int(rowspan[1:-1:])
+                        self.rowspan_num = getInt(rowspan)
                         for y in range(self.row+1,self.row+self.rowspan_num):
                             for x in range(self.col,self.col+colspan_num):
                                 self.data1['table'][y][x] = 1
@@ -218,8 +219,13 @@ class GetTableData(HTMLParserVisitor):
                 if ctx.SP_TEXT() != None and ctx.SP_TEXT().getText() == st:
                     result += self.sp_text_dict[st]
                     break
-        return result    
+        return result   
+
         
+def getInt(str1):
+    str2 = str1.replace('\'', '').replace('"','')
+    return int(str2)  
+    
         
 
 document_begin = '%\\documentclass[pdflatex,a4paper,10pt]{article}\n'+ \
@@ -299,7 +305,7 @@ class LaTeXCode(HTMLParserVisitor):
                 else:
                     break
             if self.a == 'A':
-                result = '\\href{' + href[1:-1:].replace('%','\%') + '}{' + self.visit(ctx.content()) +'}\n'
+                result = '\\href{' + href[1:-1:].replace('%','\%').replace('&','\&') + '}{' + self.visit(ctx.content()) +'}\n'
             else:
                 result = 'anchor: ' + self.visit(ctx.content()) + '\n'
             return result
@@ -401,21 +407,26 @@ class LaTeXCode(HTMLParserVisitor):
         if tag_name == 'img':
             i = 0
             src = ''
+            data_src = ''
             alt = ''
             while True:
                 attr=ctx.attribute(i)
                 if attr != None:
                     if attr.Name(0).getText() == 'src':
                         src=attr.ATTVALUE_VALUE().getText()
+                    elif attr.Name(0).getText() == 'data-src':
+                        data_src=attr.ATTVALUE_VALUE().getText()
                     elif attr.Name(0).getText() == 'alt':
                         alt=attr.ATTVALUE_VALUE().getText()
                     i += 1
                 else:
                     break
+            if src == '':
+                src = data_src
             if self.img == 'IMG':
-                result = 'alt: ' + alt[1:-1:] + '\\newline\n\\includegraphics{'+ src[1:-1:].replace('%','\%') + '}\n'
+                result = '%img alt: ' + alt[1:-1:] + '\n\\includegraphics{'+ src[1:-1:].replace('%','\%').replace('&','\&') + '}\n'
             else:
-                result = 'img alt: ' + alt[1:-1:] + '\n'
+                result = '%img alt: ' + alt[1:-1:] + '\n'
             return result
         elif tag_name == 'br':
             return '\\newline\n'
@@ -425,7 +436,7 @@ class LaTeXCode(HTMLParserVisitor):
             
     def visitSingle_slash_tag(self, ctx):
         if ctx.Name().getText() == 'p':
-            return '\\newline\\newline\n'        
+            return '\\par\n'        
         else:
             return ''
             
@@ -864,7 +875,7 @@ def main(filename, args, file_list):
     result1 = ''
     result_len = len(result)
     for i in range(result_len):
-        if (i + 1 < result_len) and result[i] == '\n' and result[i+1] == '\n' and result[i+2] == '\n':
+        if (i + 1 < result_len) and result[i] == '\n' and result[i+1] == '\n':# and result[i+2] == '\n':
             i += 1
         else:
             result1 += result[i]
