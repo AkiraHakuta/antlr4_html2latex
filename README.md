@@ -1,6 +1,6 @@
 # antlr4_html2latex  
 HTML to LaTeX converter using antlr4.  
-Author: Akira Hakuta,  Date: 2018/07/29     
+Author: Akira Hakuta,  Date: 2018/07/31      
 
 ## Installation (windows)  
 Python3: <https://www.python.org/downloads/windows/>   
