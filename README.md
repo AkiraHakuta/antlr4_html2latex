@@ -15,14 +15,14 @@ pip install cx_Freeze
 
 ## Usage
 ```
-> python.exe antlr4_html2latex.py sample1.html
+> python.exe antlr4_html2latex.py example\sample1.html
 
 This is antlr4_html2latex version 0.5.
 
 antlr4_html2latex creates 'sample1.tex'.
 ```
 ```
-> python.exe antlr4_html2latex.py sample2.html -m MOD
+> python.exe antlr4_html2latex.py example\sample2.html -m MOD
 
 This is antlr4_html2latex version 0.5.
 
@@ -119,8 +119,8 @@ If you want to antlr4_tex2sym.py to .exe files,
 #### Usage
 
 ```
-> antlr4_tex2sym.exe sample1.html
-> antlr4_tex2sym.exe sample2.html -m MOD
+> antlr4_tex2sym.exe example\sample1.html
+> antlr4_tex2sym.exe example\sample2.html -m MOD
 ```
 
 ------
@@ -146,7 +146,7 @@ The Definitive ANTLR 4 Reference (by Terence Parr)    12.4 Parsing and Lexing  X
 2. 分かった時点で、closing tag を単純に削除 
 3. error message を表示し、該当する paired tag をすべて削除     
 ```
-> python.exe antlr4_html2latex.py sample2.html -m MOD
+> python.exe antlr4_html2latex.py example\sample2.html -m MOD
 ```
 で確認してください。  
 pdflatex.exe で pdf が作れないこともあります。  
