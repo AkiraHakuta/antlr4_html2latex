@@ -156,6 +156,9 @@ option  ` -a NOA -i NOIMG　`を付けて実行。
 LaTeX の tabular はページを超えて表示することはできません。  
 `-t NOTBL` とすると、  
 'tabular' 形式ではなく、paired tag 'table' 内の TEXT のみ出力します。  
+※ 生成した tex ファイルは pdflatex.exe で compile して下さい。 
+`pdflatex.exe -synctex=1 -interaction=nonstopmode sample1.tex`  
+他の処理系では確認していません。  
 
 ####  実行ファイル 、ソースコード について   
 releases の各 zip fileをクリックして解凍。  
