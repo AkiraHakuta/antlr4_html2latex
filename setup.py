@@ -15,7 +15,7 @@ executables = [cx_Freeze.Executable(script="antlr4_html2latex.py",targetName="an
 cx_Freeze.setup(
     name = "antlr4_html2latex",
     options = {"build_exe": 
-        {"build_exe":"antlr4_html2latex_binary-0.6/","includes":includes, "include_files": include_files, "excludes": excludes,"packages": packages}},
+        {"build_exe":"antlr4_html2latex_binary-06/","includes":includes, "include_files": include_files, "excludes": excludes,"packages": packages}},
     version = "0.6",
     description = "HTML to LaTeX Converter using antlr4",
     executables = executables)
