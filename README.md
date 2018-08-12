@@ -17,18 +17,18 @@ pip install cx_Freeze
 ```
 > python.exe antlr4_html2latex.py example\sample1.html
 
-This is antlr4_html2latex version 0.5.
+This is antlr4_html2latex version 0.6.
 
 antlr4_html2latex creates 'sample1.tex'.
 ```
 ```
 > python.exe antlr4_html2latex.py example\sample2.html -m MOD
 
-This is antlr4_html2latex version 0.5.
+This is antlr4_html2latex version 0.6.
 
 modifying html file (insert 'optional tags' except p tag) ....
 
-paired tag error. delete: line = 67, column = 1, </div>
+paired tag error. delete: line = 68, column = 1, </div>
 
 paired tag error {'name':[number of opening tags, number of closing tags],...}
  {'span': [2, 1]}
@@ -43,12 +43,13 @@ line = 29, column = 5, </li>
 line = 38, column = 3, </td></tr>
 line = 40, column = 4, </th>
 line = 45, column = 6, </td>
-line = 46, column = 4, </td></tr>
-line = 47, column = 9, </td>
-line = 55, column = 3, </dd>
-line = 56, column = 3, </dt>
-line = 64, column = 30, </rt>
-line = 65, column = 5, </rp>
+line = 46, column = 6, </td>
+line = 47, column = 4, </td></tr>
+line = 48, column = 9, </td>
+line = 56, column = 3, </dd>
+line = 57, column = 3, </dt>
+line = 65, column = 30, </rt>
+line = 66, column = 5, </rp>
 
 modifying html file (insert  p tag) ....
 
@@ -91,8 +92,8 @@ paired tag --> latex
 [pair_tag], [li], [\\item ] , [\n]
 [pair_tag], [ol], [\n\\begin{enumerate}\n] , [\n\\end{enumerate}]
 [pair_tag], [ul], [\n\\begin{itemize}\n],[\n\\end{itemize}]
-[pair_tag], [dt], [],[\\newline\n]
-[pair_tag], [dd], [~~~],[\\newline\n]
+[pair_tag], [dt], [],[\\par\n]
+[pair_tag], [dd], [~~~],[\\par\n]
 ......
 
 entity code --> latex
@@ -108,6 +109,8 @@ entity code --> latex
 
 [sp_text], [&], [\\verb|&|]
 [sp_text], [$], [\\verb|$|]
+[sp_text], [%], [\\verb|%|]
+[sp_text], [_], [\_]
 ```
 
 
