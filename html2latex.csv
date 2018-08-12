@@ -3,8 +3,8 @@
 [pair_tag], [li], [\\item ] , [\n]
 [pair_tag], [ol], [\n\\begin{enumerate}\n] , [\n\\end{enumerate}]
 [pair_tag], [ul], [\n\\begin{itemize}\n],[\n\\end{itemize}]
-[pair_tag], [dt], [],[\\newline\n]
-[pair_tag], [dd], [~~~],[\\newline\n]
+[pair_tag], [dt], [],[\\par\n]
+[pair_tag], [dd], [~~~],[\\par\n]
 [pair_tag], [h4], [\\section*{\\normalsize ], [}\n]
 [pair_tag], [h1], [\\section*{\\Huge ], [}\n]
 [pair_tag], [h2], [\\section*{\\Large ], [}\n]
@@ -13,7 +13,7 @@
 [pair_tag], [h5], [\\section*{\\small ], [}\n]
 [pair_tag], [h6], [\\section*{\\footnotesize ], [}\n]
 [pair_tag], [strong], [{\\bf ], [}]
-[pair_tag], [select], [\\newline\nbegin select:\\newline\n], [\n\n\\newline\nend select \\newline\n]
+[pair_tag], [select], [\\newline\nbegin select:\\par\n], [\n\n\\newline\nend select \\par\n]
 
 
 entity code --> latex
@@ -36,3 +36,5 @@ entity code --> latex
 
 [sp_text], [&], [\\verb|&|]
 [sp_text], [$], [\\verb|$|]
+[sp_text], [%], [\\verb|%|]
+[sp_text], [_], [\_]

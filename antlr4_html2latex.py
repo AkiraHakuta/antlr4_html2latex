@@ -1,5 +1,5 @@
-# python.exe antlr4_html2latex.py sample1.html
-# python.exe antlr4_html2latex.py sample2.html -m MOD
+# python.exe antlr4_html2latex.py example\sample1.html
+# python.exe antlr4_html2latex.py example\sample2.html -m MOD
 
 from antlr4 import *
 
@@ -124,7 +124,8 @@ class GetTableData(HTMLParserVisitor):
         self.data1 = None
         self.col=None
         self.row=None
-        self.col_size = None        
+        self.col_size = None 
+        
         
     def visitDocument(self, ctx):
         result = ''
@@ -429,7 +430,7 @@ class LaTeXCode(HTMLParserVisitor):
                 result = 'img alt: ' + alt[1:-1:] + '\n'
             return result
         elif tag_name == 'br':
-            return '\\newline\n'
+            return '\\par\n'
         else:
             return ''
             
@@ -888,7 +889,7 @@ def main(filename, args, file_list):
     
     
 
-version = '0.5'
+version = '0.6'
 if __name__ == '__main__':
     aparser = argparse.ArgumentParser()
     aparser.add_argument("filename", help="set filename, for example test.html")    
