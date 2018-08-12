@@ -158,7 +158,7 @@ LaTeX の tabular はページを超えて表示することはできません�
 'tabular' 形式ではなく、paired tag 'table' 内の TEXT のみ出力します。  
 
 ※ 生成した tex ファイルは pdflatex.exe で compile して下さい。  
-`pdflatex.exe -synctex=1 -interaction=nonstopmode sample1.tex`   
+`> pdflatex.exe -synctex=1 -interaction=nonstopmode sample1.tex`   
 大きな問題はないと思いますが、他の処理系では確認していません。  
 
 ####  実行ファイル 、ソースコード について   
