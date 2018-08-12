@@ -159,7 +159,7 @@ LaTeX の tabular はページを超えて表示することはできません�
 
 ※ 生成した tex ファイルは pdflatex.exe で compile して下さい。  
 `pdflatex.exe -synctex=1 -interaction=nonstopmode sample1.tex`   
-他の処理系では確認していません。  
+大きな問題はないと思いますが、他の処理系では確認していません。  
 
 ####  実行ファイル 、ソースコード について   
 releases の各 zip fileをクリックして解凍。  
