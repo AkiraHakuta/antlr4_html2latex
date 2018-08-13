@@ -58,7 +58,7 @@ NameChar    :   NameStartChar
             |   '\u00B7'|   '\u0300'..'\u036F'| '\u203F'..'\u2040';
 
 fragment
-NameStartChar:  [a-zA-Z]
+NameStartChar:  [:a-zA-Z]
             |   '\u2070'..'\u218F' 
             |   '\u2C00'..'\u2FEF' 
             |   '\u3001'..'\uD7FF' 
